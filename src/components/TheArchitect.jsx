@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { User, Shield, Briefcase, Database, ScanLine, Fingerprint, Lock } from 'lucide-react';
+import { Briefcase, Database, Fingerprint, Globe, MapPin, LayoutTemplate } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
 
 const TheArchitect = () => {
@@ -23,8 +23,8 @@ const TheArchitect = () => {
                             viewport={{ once: true }}
                             className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[--neon-cyan]/10 border border-[--neon-cyan]/20 text-[--neon-cyan] text-xs font-mono mb-8"
                         >
-                            <Shield size={12} />
-                            AUTHENTICATED USER
+                            <Globe size={12} />
+                            ABOUT
                         </motion.div>
 
                         <motion.h2
@@ -34,8 +34,8 @@ const TheArchitect = () => {
                             transition={{ delay: 0.1 }}
                             className="text-4xl md:text-6xl font-bold mb-8 tracking-tight"
                         >
-                            The Man Behind <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[--text-dim]">The Machine.</span>
+                            Hi, I'm <span className="spark-underline">Sarang</span>. <br />
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[--text-muted]">I design and build websites.</span>
                         </motion.h2>
 
                         <motion.div
@@ -46,13 +46,8 @@ const TheArchitect = () => {
                             className="space-y-6 text-lg text-[--text-muted] leading-relaxed border-l-2 border-white/5 pl-6"
                         >
                             <p>
-                                <strong className="text-white">I don't sell tools. I sell outcomes.</strong><br />
-                                Most agencies bill you for hours spent guessing. I bill for specific, measurable results: Automated workflows, realtime reporting, and zero manual effort.
-                            </p>
-                            <p>
-                                My approach is singular and ruthless:
-                                <br />
-                                {">>"} UNDERSTAND_BUSINESS -{">"} DESIGN_SYSTEM -{">"} AUTOMATE_OUTCOME
+                                <strong className="text-white">Most websites look good and then just sit there.</strong><br />
+                                At Relentix we design and build websites for businesses: villas, fashion brands and local businesses, plus personalised software like billing systems. Alongside the studio, I'm learning AI automation. I build my own workflows and agents, and I use AI every day to design, write and ship work faster.
                             </p>
                         </motion.div>
                     </div>
@@ -77,11 +72,11 @@ const TheArchitect = () => {
                                         <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
                                         <div className="w-1.5 h-1.5 rounded-full bg-white/20" />
                                     </div>
-                                    <span className="text-[10px] font-mono text-[--text-dim] tracking-[0.2em] uppercase">Identity_Record_#8842</span>
+                                    <a href="https://relentix.co.in" target="_blank" rel="noopener noreferrer" className="text-[10px] font-mono text-[--text-muted] tracking-[0.2em] uppercase hover:text-[--neon-cyan]">relentix.co.in</a>
                                 </div>
-                                <div className="text-[10px] font-mono text-[--neon-cyan]/50 flex items-center gap-2">
-                                    <Lock size={10} />
-                                    ENCRYPTED
+                                <div className="hidden sm:flex text-[10px] font-mono text-[--neon-cyan]/70 items-center gap-2">
+                                    <MapPin size={10} />
+                                    PUNE, INDIA
                                 </div>
                             </div>
 
@@ -96,7 +91,7 @@ const TheArchitect = () => {
                                         <div className="absolute -inset-1 rounded-full border border-[--neon-purple]/20 border-b-transparent animate-spin-slow duration-5000" />
 
                                         <div className="w-full h-full rounded-full bg-white/5 flex items-center justify-center overflow-hidden relative z-10">
-                                            <User size={40} className="text-white/80" />
+                                            <img src="/sarang.webp" alt="Sarang Kumbhar" width="96" height="96" className="w-full h-full object-cover" />
                                             {/* Scan Overlay */}
                                             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[--neon-cyan]/10 to-transparent animate-scan" />
                                         </div>
@@ -104,37 +99,52 @@ const TheArchitect = () => {
 
                                     <div className="space-y-1">
                                         <h3 className="text-3xl font-bold text-white tracking-wide">SARANG KUMBHAR</h3>
-                                        <div className="inline-block px-2 py-0.5 rounded bg-[--neon-cyan]/10 text-[--neon-cyan] text-[10px] font-mono tracking-wider border border-[--neon-cyan]/20">
-                                            AUTOMATION ARCHITECT
+                                        <div className="flex flex-wrap justify-center sm:justify-start gap-2 pt-1">
+                                            <a href="https://relentix.co.in" target="_blank" rel="noopener noreferrer" className="inline-block px-2 py-0.5 rounded bg-[--neon-cyan] text-black text-[11px] font-mono font-bold tracking-wider hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-shadow">
+                                                FOUNDER · RELENTIX
+                                            </a>
+                                            <div className="inline-block px-2 py-0.5 rounded bg-[--neon-cyan]/10 text-[--neon-cyan] text-[11px] font-mono tracking-wider border border-[--neon-cyan]/20">
+                                                AUTOMATION ARCHITECT
+                                            </div>
                                         </div>
-                                        <div className="flex items-center justify-center sm:justify-start gap-4 text-xs text-[--text-dim] mt-2 font-mono">
-                                            <span>AGE: 19</span>
-                                            <span>|</span>
-                                            <span>LOC: INDIA (GLOBAL)</span>
+                                        <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1 text-xs text-[--text-muted] mt-2 font-mono">
+                                            <span className="whitespace-nowrap">AGE: 20</span>
+                                            <span className="whitespace-nowrap">PUNE, INDIA</span>
+                                            <span className="whitespace-nowrap">AIMING GLOBAL</span>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Data Grid - "The Specs" */}
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10 border border-white/10 rounded-sm overflow-hidden">
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-white/10 border border-white/10 rounded-sm overflow-hidden">
+                                    {/* Studio */}
+                                    <div className="bg-[#0a0a0a] p-4 hover:bg-white/5 transition-colors group">
+                                        <div className="flex items-center gap-2 text-[10px] text-[--text-muted] uppercase tracking-wider mb-2">
+                                            <LayoutTemplate size={12} className="group-hover:text-[--neon-cyan] transition-colors" />
+                                            Studio
+                                        </div>
+                                        <div className="text-sm text-white font-medium">Relentix</div>
+                                        <div className="text-[11px] text-[--neon-cyan] mt-1">Web design & development</div>
+                                    </div>
+
                                     {/* Cell 1 */}
                                     <div className="bg-[#0a0a0a] p-4 hover:bg-white/5 transition-colors group">
-                                        <div className="flex items-center gap-2 text-[10px] text-[--text-dim] uppercase tracking-wider mb-2">
+                                        <div className="flex items-center gap-2 text-[10px] text-[--text-muted] uppercase tracking-wider mb-2">
                                             <Briefcase size={12} className="group-hover:text-[--neon-cyan] transition-colors" />
                                             Education
                                         </div>
-                                        <div className="text-sm text-white font-medium">Pursuing Diploma (Comp. Eng)</div>
-                                        <div className="text-[10px] text-[--neon-purple] mt-1">3rd Year Student</div>
+                                        <div className="text-sm text-white font-medium">Diploma, Computer Eng.</div>
+                                        <div className="text-[11px] text-[--neon-purple] mt-1">After 10th standard</div>
                                     </div>
 
                                     {/* Cell 2 */}
                                     <div className="bg-[#0a0a0a] p-4 hover:bg-white/5 transition-colors group">
-                                        <div className="flex items-center gap-2 text-[10px] text-[--text-dim] uppercase tracking-wider mb-2">
+                                        <div className="flex items-center gap-2 text-[10px] text-[--text-muted] uppercase tracking-wider mb-2">
                                             <Database size={12} className="group-hover:text-[--neon-cyan] transition-colors" />
-                                            Core Stack
+                                            AI Automation
                                         </div>
                                         <div className="text-sm text-white font-medium">Make.com / n8n / Agents</div>
-                                        <div className="text-[10px] text-[--neon-green] mt-1">Full Stack Automation</div>
+                                        <div className="text-[11px] text-[--neon-green] mt-1">Learning & using daily</div>
                                     </div>
                                 </div>
 
@@ -144,10 +154,10 @@ const TheArchitect = () => {
                                         <Fingerprint size={60} />
                                     </div>
                                     <div className="font-mono text-[10px] text-[--neon-cyan] mb-3 uppercase tracking-widest border-b border-white/5 pb-2">
-                                        Subject Vision Analysis
+                                        What I'm building
                                     </div>
                                     <p className="text-sm text-[--text-muted] leading-relaxed italic">
-                                        "Currently building towards <span className="text-white not-italic">NextGen AI</span>. Focused on turning complex, repetitive business chaos into self-correcting systems."
+                                        "<span className="text-white not-italic">Relentix</span> designs and builds websites for growing businesses. Alongside it, I'm learning AI automation and using it to work faster and smarter."
                                     </p>
                                 </div>
 

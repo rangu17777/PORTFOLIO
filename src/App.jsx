@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Cursor from './components/Cursor';
 import Background from './components/Background';
 import NeuralLinks from './components/NeuralLinks';
@@ -10,9 +10,13 @@ import SystemsShowcase from './components/SystemsShowcase';
 import Process from './components/Process';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import IntroLoader, { shouldPlayIntro } from './components/IntroLoader';
 import Lenis from '@studio-freight/lenis';
 
 function App() {
+    const lenisRef = useRef(null);
+    const [introDone, setIntroDone] = useState(() => !shouldPlayIntro());
+
     useEffect(() => {
         const lenis = new Lenis({
             duration: 1.2,
@@ -25,17 +29,34 @@ function App() {
             touchMultiplier: 2,
         });
 
+        lenisRef.current = lenis;
+
+        let rafId = 0;
         function raf(time) {
             lenis.raf(time);
-            requestAnimationFrame(raf);
+            rafId = requestAnimationFrame(raf);
         }
 
-        requestAnimationFrame(raf);
+        rafId = requestAnimationFrame(raf);
 
         return () => {
+            cancelAnimationFrame(rafId);
             lenis.destroy();
+            lenisRef.current = null;
         };
     }, []);
+
+    // Lock scrolling while the intro plays.
+    useEffect(() => {
+        const root = document.documentElement;
+        if (introDone) {
+            root.style.overflow = '';
+            lenisRef.current?.start();
+        } else {
+            root.style.overflow = 'hidden';
+            lenisRef.current?.stop();
+        }
+    }, [introDone]);
 
     return (
         <div className="bg-core min-h-screen text-main font-sans selection:bg-neon-cyan selection:text-black relative overflow-x-hidden">
@@ -43,15 +64,17 @@ function App() {
             <Background />
             <NeuralLinks />
 
+            {!introDone && <IntroLoader onComplete={() => setIntroDone(true)} />}
+
             <Navbar />
 
             {/* Main Content: Stabilized (No Skew/Scale) */}
-            <main className="container mx-auto px-6 pt-32 pb-20 space-y-32">
+            <main className="container mx-auto px-6 pt-28 pb-20 space-y-32">
                 <Hero />
-                <TheArchitect />
-                <AutomationDemo />
                 <SystemsShowcase />
+                <TheArchitect />
                 <Process />
+                <AutomationDemo />
                 <Contact />
             </main>
 

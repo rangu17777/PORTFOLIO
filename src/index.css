@@ -76,3 +76,109 @@
 .text-gradient {
   @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-cyan to-neon-purple;
 }
+/* Electric underline: thin line hugging the name, a pulse of current every few seconds */
+.spark-underline {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+}
+
+.spark-underline::after {
+  content: '';
+  position: absolute;
+  left: 0.04em;
+  right: 0.04em;
+  bottom: 0.02em;
+  height: 2px;
+  border-radius: 2px;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 50%, transparent 100%) no-repeat,
+    var(--neon-cyan);
+  background-size: 30% 100%, 100% 100%;
+  background-position: -40% 0, 0 0;
+  box-shadow: 0 0 6px rgba(0, 240, 255, 0.55);
+  animation: current-pulse 1.6s linear infinite;
+}
+
+@keyframes current-pulse {
+  0% { background-position: -40% 0, 0 0; box-shadow: 0 0 6px rgba(0, 240, 255, 0.55); }
+  50% { box-shadow: 0 0 10px rgba(0, 240, 255, 0.9), 0 0 16px rgba(0, 240, 255, 0.35); }
+  100% { background-position: 140% 0, 0 0; box-shadow: 0 0 6px rgba(0, 240, 255, 0.55); }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .spark-underline::after { animation: none; }
+}
+
+/* Tag pinned to a card with a nail */
+.nailed-tag {
+  display: inline-block;
+  padding: 0.45rem 0.85rem 0.4rem 1.6rem;
+  background: #f4f1ea;
+  color: #1a1a1a;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 3px;
+  transform: rotate(-5deg);
+  transform-origin: 0.7rem 50%;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15), 0 6px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .nailed-tag { transform: rotate(-2deg); }
+
+.nailed-tag__nail {
+  position: absolute;
+  left: 0.55rem;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f5f5f5 0%, #9a9a9a 45%, #4a4a4a 100%);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 1px 2px 3px rgba(0, 0, 0, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nailed-tag { transition: none; }
+}
+
+/* Slanted section tag */
+.slant-tag {
+  display: inline-block;
+  padding: 0.35rem 1.1rem;
+  background: var(--neon-cyan);
+  color: #000;
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  box-shadow: 0 0 24px rgba(0, 240, 255, 0.25);
+}
+
+/* Double wavy underline (hero "Relentix") */
+.wavy-link {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--neon-cyan);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 6px;
+  transition: color 0.3s ease;
+}
+
+.wavy-link:hover { color: var(--neon-cyan); }
+
+/* Hero device frame */
+.device-frame {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 0 0 1px rgba(0, 240, 255, 0.06),
+    0 30px 80px -20px rgba(0, 0, 0, 0.9),
+    0 0 60px -10px rgba(0, 240, 255, 0.18);
+}

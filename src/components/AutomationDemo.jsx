@@ -6,6 +6,7 @@ import { useTerminal } from '../hooks/useTerminal';
 
 const AutomationDemo = () => {
     const [formData, setFormData] = useState({
+        name: '',
         email: '',
         painPoint: '',
         depth: 'concise', // Default value must be set here to send to Webhook
@@ -20,11 +21,11 @@ const AutomationDemo = () => {
 
         // 1. Start Visual Processing
         startTyping([
-            '> Connecting to Automation Engine...',
-            '> analyzing_input_parameters...',
-            '> Accessing Advanced AI Model...',
-            '> Drafting custom strategy...',
-            '> Status: READY.'
+            '> Sending your request...',
+            '> Reading your task...',
+            '> Finding what can be automated...',
+            '> Writing your plan...',
+            '> Done. Check your inbox.'
         ]);
 
         // 2. Trigger "Backend" (Real Make.com Connection)
@@ -43,11 +44,11 @@ const AutomationDemo = () => {
                 >
                     <div className="flex items-center gap-3 text-[--neon-cyan] mb-4">
                         <Terminal size={24} />
-                        <span className="font-mono font-bold tracking-wider">LIVE DEMO</span>
+                        <span className="font-mono font-bold tracking-wider">TRY IT LIVE</span>
                     </div>
-                    <h2 className="text-4xl font-bold mb-6">Don't just look at screenshots. <br /> Test the agent.</h2>
+                    <h2 className="text-4xl font-bold mb-6">See the automation <br /> work on you.</h2>
                     <p className="text-[--text-muted] text-lg mb-8 leading-relaxed">
-                        I built this site with a live webhook integration. Tell me your biggest manual headache, and my AI agent will instantly draft a solution strategy and email it to you.
+                        This form is connected to a real automation. Describe a task your team does by hand, and my AI agent will write a plan to automate it and email it to you in a minute.
                     </p>
 
 
@@ -125,11 +126,11 @@ const AutomationDemo = () => {
                                 </div>
 
                                 <div>
-                                    <label className="block text-xs uppercase text-[--text-muted] mb-2">MANUAL PROCESS PAIN POINT</label>
+                                    <label className="block text-xs uppercase text-[--text-muted] mb-2">TASK YOU DO BY HAND</label>
                                     <textarea
                                         rows="3"
                                         className="w-full bg-[#111] border border-[#333] p-3 text-white focus:border-[--neon-cyan] focus:outline-none transition-colors rounded"
-                                        placeholder="Describe the messy workflow you want to automate..."
+                                        placeholder="e.g. We copy every website enquiry into Excel and call them back manually"
                                         value={formData.painPoint}
                                         onChange={(e) => setFormData({ ...formData, painPoint: e.target.value })}
                                         required
@@ -141,9 +142,9 @@ const AutomationDemo = () => {
                                     className="relative z-20 w-full bg-[--neon-cyan] text-black font-bold py-4 hover:shadow-[0_0_20px_rgba(6,182,212,0.4)] transition-all flex items-center justify-center gap-2 group rounded"
                                 >
                                     <Send size={16} className="group-hover:translate-x-1 transition-transform" />
-                                    GENERATE STRATEGY
+                                    EMAIL ME THE PLAN
                                 </button>
-                                <p className="text-[10px] text-[--text-dim] text-center">*AI Agent will analyze request & email you the blueprint.</p>
+                                <p className="text-[10px] text-[--text-dim] text-center">Your plan arrives by email. No spam, no sales calls.</p>
                             </form>
                         )}
 
@@ -162,7 +163,7 @@ const AutomationDemo = () => {
                                 ))}
                                 <div className="mt-4 flex items-center gap-2 text-[--text-muted] text-xs animate-pulse">
                                     <Loader2 size={12} className="animate-spin" />
-                                    PROCESSING_REQUEST...
+                                    Working on it...
                                 </div>
                             </div>
                         )}
@@ -177,7 +178,7 @@ const AutomationDemo = () => {
                                 >
                                     <AlertCircle size={48} />
                                 </motion.div>
-                                <h3 className="text-xl text-white font-bold mb-2">Connection Failed</h3>
+                                <h3 className="text-xl text-white font-bold mb-2">Something went wrong</h3>
                                 <p className="text-red-400 font-mono text-xs mb-6 max-w-xs mx-auto">
                                     Error: {error}
                                 </p>
@@ -201,16 +202,16 @@ const AutomationDemo = () => {
                                 >
                                     <CheckCircle size={48} />
                                 </motion.div>
-                                <h3 className="text-xl text-white font-bold mb-2">Action Complete</h3>
+                                <h3 className="text-xl text-white font-bold mb-2">Plan sent</h3>
                                 <p className="text-[--text-muted] text-sm mb-8">
-                                    Check your inbox. The generated strategy has been sent to <span className="text-white">{formData.email}</span>.
+                                    Check your inbox. Your automation plan has been sent to <span className="text-white">{formData.email}</span>.
                                 </p>
                                 <button
                                     onClick={reset}
                                     className="flex items-center gap-2 px-6 py-2 border border-[--neon-cyan] text-[--neon-cyan] hover:bg-[--neon-cyan] hover:text-black rounded transition-all text-sm font-bold"
                                 >
                                     <RefreshCw size={14} />
-                                    RUN NEW SIMULATION
+                                    TRY ANOTHER TASK
                                 </button>
                             </div>
                         )}

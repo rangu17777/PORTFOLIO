@@ -7,8 +7,8 @@ const Contact = () => {
     const [message, setMessage] = useState('');
     const [showModal, setShowModal] = useState(false);
 
-    const subject = "Transmission: Priority Inquiry";
-    const body = message || "Initializing secure connection... I am interested in automation services.";
+    const subject = "New project enquiry";
+    const body = message || "Hi Sarang, I'd like to talk about a website project.";
 
     const handleEmailClick = (e) => {
         e.preventDefault();
@@ -44,14 +44,14 @@ const Contact = () => {
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[--neon-cyan] opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[--neon-cyan]"></span>
                                 </span>
-                                Transmission_Channel_Open
+                                Open for new projects
                             </div>
 
                             <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                                Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[--text-muted]">escalate</span> your systems?
+                                Have a project <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[--text-muted]">in mind?</span>
                             </h2>
                             <p className="text-[--text-muted] text-lg leading-relaxed">
-                                Stop wasting human capital on robotic tasks. Let's engineer a solution that works while you sleep.
+                                Tell me about your business and the website you need. I usually reply within a day.
                             </p>
                         </div>
 
@@ -59,14 +59,14 @@ const Contact = () => {
                         <div className="flex flex-col gap-4 w-full md:w-auto min-w-[300px]">
                             {/* WhatsApp Button - Primary */}
                             <a
-                                href="https://wa.me/918793198054?text=Hi,%20I%20am%20ready%20to%20automate."
+                                href="https://wa.me/918793198054?text=Hi%20Sarang,%20I%20have%20a%20project%20in%20mind."
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="group/btn relative flex items-center justify-between px-8 py-5 bg-[--neon-cyan] text-black rounded-xl font-bold text-lg hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] transition-all duration-300 transform hover:-translate-y-1"
                             >
                                 <span className="flex items-center gap-3">
                                     <MessageCircle className="w-6 h-6" />
-                                    Initiate Chat
+                                    Chat on WhatsApp
                                 </span>
                                 <ArrowUpRight />
                             </a>
@@ -79,7 +79,7 @@ const Contact = () => {
                             >
                                 <span className="flex items-center gap-3">
                                     <Mail className="w-6 h-6" />
-                                    Send Transmission
+                                    Email me
                                 </span>
                                 <div className="opacity-0 group-hover/btn:opacity-100 transition-opacity">
                                     <ArrowUpRight />
@@ -94,7 +94,7 @@ const Contact = () => {
                                     type="text"
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
-                                    placeholder="awaiting_input_stream..."
+                                    placeholder="Your message (optional)"
                                     className="bg-transparent border-none outline-none flex-1 text-[--neon-cyan] placeholder-[--text-dim]/50 w-full"
                                 />
                                 <span className="w-1.5 h-4 bg-[--neon-cyan] animate-pulse" />
@@ -130,8 +130,8 @@ const Contact = () => {
                                 <X size={20} />
                             </button>
 
-                            <h3 className="text-xl font-bold text-white mb-2">Select Protocol</h3>
-                            <p className="text-[--text-dim] text-sm mb-6">Choose your preferred transmission method.</p>
+                            <h3 className="text-xl font-bold text-white mb-2">Open email in…</h3>
+                            <p className="text-[--text-dim] text-sm mb-6">Pick where you want to write the email.</p>
 
                             <div className="space-y-3">
                                 <button
@@ -142,7 +142,7 @@ const Contact = () => {
                                         <Smartphone size={24} />
                                     </div>
                                     <div>
-                                        <div className="font-bold text-white">Native App</div>
+                                        <div className="font-bold text-white">Mail app</div>
                                         <div className="text-xs text-[--text-dim]">Best for Mobile</div>
                                     </div>
                                 </button>
@@ -155,7 +155,7 @@ const Contact = () => {
                                         <Monitor size={24} />
                                     </div>
                                     <div>
-                                        <div className="font-bold text-white">Web Interface</div>
+                                        <div className="font-bold text-white">Gmail in browser</div>
                                         <div className="text-xs text-[--text-dim]">Best for PC / Gmail Web</div>
                                     </div>
                                 </button>

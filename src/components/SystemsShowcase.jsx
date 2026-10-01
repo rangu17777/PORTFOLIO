@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Code, Workflow, Database, Zap, X, ChevronRight, LayoutDashboard, TrendingUp } from 'lucide-react';
+import { ExternalLink, Workflow, Zap, X, ChevronRight, ArrowUpRight } from 'lucide-react';
 import SpotlightCard from './SpotlightCard';
+
+const websites = [
+    { name: "Dress To Impress by Mohini", niche: "Ethnic fashion e-commerce", image: "/projects/websites/dresstoimpress.webp", url: "https://www.dresstoimpressbymohini.com/en" },
+    { name: "River Deck Villa", niche: "Riverside villa · Karjat", image: "/projects/websites/riverdeck.webp", url: "https://www.riverdeckvilla.com/" },
+    { name: "Madhuban Villa", niche: "Villa stays · Karjat", image: "/projects/websites/villakarjat.webp", url: "https://villakarjat.netlify.app" },
+    { name: "AA Nagare Infra Machinery", niche: "Billing & admin software", label: "Personalised software", image: "/projects/websites/billing.webp" },
+];
 
 const projects = [
     {
@@ -13,7 +20,7 @@ const projects = [
         problem: "Sales reps wasted hours manually checking forms, researching companies, and making repetitive pitch calls.",
         solution: "Full automation: New Lead (Tally) → AI Research (Perplexity) → Voice Call (Vapi) → CRM (Airtable) → Custom Proposal (PandaDoc).",
         outcome: "Zero manual intervention. 24/7 Immediate lead engagement.",
-        image: "/projects/lead-gen/automation-banner.png",
+        image: "/projects/lead-gen/make-scenario.png",
         links: [],
         gallery: [
             "/projects/lead-gen/make-scenario.png",
@@ -21,30 +28,7 @@ const projects = [
             "/projects/lead-gen/tally-form.png"
         ],
         manual_problem: `A human sales rep must constantly check for new form submissions, review each lead's details and evaluate if they're worth pursuing, research the company to understand how to help them, make phone calls and deliver competent pitches, then manually create custom proposals. That's hours of repetitive work... and could lead to potential leads slipping through the cracks.`,
-        auto_solution: `When a new lead fills out a request form, the lead database automatically qualifies them, researches their company, then makes an automated phone call to pitch our offer. If the lead shows interest, the system saves the call outcome, summarizes the conversation, and generates a personalized proposal— all without a human having to lift a single finger, in an super scalable way.`
-    },
-    {
-        id: 2,
-        title: "Full-Stack AI Web Apps Suite",
-        tags: ["React & Angular", "Google Gemini", "Vibe Coded", "Dashboard UI"],
-        icon: <LayoutDashboard size={24} />,
-        problem: "Traditional student portals and finance tools are clunky, disconnected, and lack intelligence.",
-        solution: "Two production-grade apps shipped: 'HotelInsightPro' for education and 'FinFlow AI' for business finance.",
-        outcome: "Modern, dark-mode dashboards with embedded AI Agents.",
-        image: "/projects/hotel-dashboard/vibe-apps-final.jpg",
-        demoLink: "https://ai.studio/apps/drive/1HUuf8uTMJe21O0D588DwT40cKJGVger0?fullscreenApplet=true",
-        links: [
-            { label: "HotelInsightPro Demo", url: "https://ai.studio/apps/drive/1HUuf8uTMJe21O0D588DwT40cKJGVger0?fullscreenApplet=true" },
-            { label: "FinFlow AI Demo", url: "https://ai.studio/apps/drive/1trnvfpfuOJdGVG4d0FJC4Y_lTMM9LjOp?fullscreenApplet=true" }
-        ],
-        gallery: [
-            "/projects/hotel-dashboard/login.png",
-            "/projects/hotel-dashboard/ai-assistant.png",
-            "/projects/finance-dashboard/dashboard-chat.png",
-            "/projects/finance-dashboard/login.png"
-        ],
-        manual_problem: `Across industries, users are stuck with "boring" software. Hotel management students juggle physical logbooks and scattered PDFs. Small business owners drown in messy Excel sheets to track GST and expenses. In both cases, the data is static, the UI is uninspiring, and there's zero intelligence helping them make decisions.`,
-        auto_solution: `I built two "Vibe Coded" solutions to solve this. HotelInsightPro: A comprehensive academic dashboard where students track assignments and training logs, with a Gemini-powered AI tutor that knows their curriculum. FinFlow AI: A dark-mode financial command center tracks invoices and expenses, but the killer feature is the AI Chat—you can literally ask "Who owes me money?" and it answers instantly.`
+        auto_solution: `When a new lead fills out a request form, the lead database automatically qualifies them, researches their company, then makes an automated phone call to pitch our offer. If the lead shows interest, the system saves the call outcome, summarizes the conversation, and generates a personalized proposal— all without a human having to lift a single finger, in a way that scales.`
     },
     {
         id: 3,
@@ -54,7 +38,7 @@ const projects = [
         problem: "Sales reps typically prepare for calls by manually researching prospects, often missing key details.",
         solution: "An automated Agent that synthesizes web & LinkedIn data into a pre-call cheat sheet.",
         outcome: "Higher trust, better angles, and increased conversion rates.",
-        image: "/projects/sales-agent/agent-builds.jpg",
+        image: "/projects/sales-agent/chat.png",
         buttonLabel: "Visit Agent",
         demoLink: "https://app.relevanceai.com/agents/d7b62b/f84056aa-75a7-4a7a-aefb-0046e3b6307a/d3e6145d-d893-41ce-8892-559158fd1ebb/embed-chat?hide_tool_steps=false&hide_file_uploads=false&hide_conversation_list=false&bubble_style=icon&primary_color=%234c2439&bubble_icon=pd%2Fchat&input_placeholder_text=Type+your+message...&hide_logo=false&hide_description=false",
         gallery: [
@@ -69,6 +53,7 @@ const SystemsShowcase = () => {
     const [selectedId, setSelectedId] = useState(null);
     const [activeImage, setActiveImage] = useState(null);
     const [isZoomed, setIsZoomed] = useState(false);
+    const [tab, setTab] = useState('websites');
 
     const handleCardClick = (project) => {
         setSelectedId(project.id);
@@ -83,15 +68,72 @@ const SystemsShowcase = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     className="text-4xl font-bold mb-4"
                 >
-                    Proof of <span className="text-[--neon-cyan]">Systems</span>
+                    See the work. <span className="text-[--neon-cyan]">Then talk.</span>
                 </motion.h2>
-                <p className="text-[--text-muted] max-w-2xl">
-                    I don't sell "websites". I sell efficiency. Here are live systems running in production.
+                <p className="text-[--text-muted] max-w-2xl mb-8">
+                    Websites built at Relentix for real businesses, plus AI automation projects I've built while learning.
                 </p>
+
+                <div role="tablist" className="inline-flex p-1 rounded-full bg-white/5 border border-white/10">
+                    {[['websites', 'Websites'], ['automation', 'My AI Projects']].map(([key, label]) => (
+                        <button
+                            key={key}
+                            role="tab"
+                            aria-selected={tab === key}
+                            onClick={() => setTab(key)}
+                            className={`px-5 py-2.5 rounded-full text-sm font-medium transition-colors ${tab === key ? 'bg-[--neon-cyan] text-black' : 'text-[--text-muted] hover:text-white'}`}
+                        >
+                            {label}
+                        </button>
+                    ))}
+                </div>
             </div>
 
+            {tab === 'websites' && (
+                <div className="grid sm:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                    {websites.map((site, i) => {
+                        const Wrapper = site.url ? 'a' : 'div';
+                        return (
+                            <motion.div
+                                key={site.name}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                            >
+                                <Wrapper
+                                    {...(site.url ? { href: site.url, target: '_blank', rel: 'noopener noreferrer' } : {})}
+                                    className="group block rounded-xl overflow-hidden border border-white/10 bg-[#0a0a0a] hover:border-[--neon-cyan]/50 transition-colors"
+                                >
+                                    <div className="relative aspect-[16/10] overflow-hidden border-b border-white/5">
+                                        {site.label && (
+                                            <span className="nailed-tag absolute top-4 left-4 z-10">
+                                                <span className="nailed-tag__nail" aria-hidden="true" />
+                                                {site.label}
+                                            </span>
+                                        )}
+                                        <img src={site.image} alt={`${site.name} website`} loading="lazy" className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
+                                    </div>
+                                    <div className="p-5 flex items-center justify-between gap-4">
+                                        <div>
+                                            <h3 className="text-lg font-bold text-white group-hover:text-[--neon-cyan] transition-colors">{site.name}</h3>
+                                            <p className="text-sm text-[--text-muted]">{site.niche}</p>
+                                        </div>
+                                        {site.url && (
+                                            <span className="shrink-0 w-9 h-9 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[--neon-cyan] group-hover:text-black transition-colors" aria-hidden="true">
+                                                <ArrowUpRight size={16} />
+                                            </span>
+                                        )}
+                                    </div>
+                                </Wrapper>
+                            </motion.div>
+                        );
+                    })}
+                </div>
+            )}
+
             {/* Grid of Cards */}
-            <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {tab === 'automation' && <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
                 {projects.map((project) => (
                     <motion.div
                         layoutId={`card-${project.id}`}
@@ -127,7 +169,7 @@ const SystemsShowcase = () => {
                                             <img
                                                 src={project.image}
                                                 alt={project.title}
-                                                className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-100"
+                                                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 opacity-100"
                                             />
                                         </div>
                                     )}
@@ -175,7 +217,7 @@ const SystemsShowcase = () => {
                         </motion.div>
                     </motion.div>
                 ))}
-            </div>
+            </div>}
 
             {/* Expanded Modal - Portal to break out of Canvas Transform */}
             {createPortal(
@@ -225,7 +267,7 @@ const SystemsShowcase = () => {
                                                 >
                                                     <div className="flex items-center gap-3 text-[--neon-cyan] mb-3">
                                                         {project.icon}
-                                                        <span className="font-mono text-xs tracking-widest uppercase">System Architecture</span>
+                                                        <span className="font-mono text-xs tracking-widest uppercase">Case Study</span>
                                                     </div>
                                                     <motion.h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight text-white">{project.title}</motion.h2>
 
@@ -272,19 +314,19 @@ const SystemsShowcase = () => {
                                                     className="space-y-6"
                                                 >
                                                     <div className="relative pl-6 py-3 pr-4 border-l-2 border-red-500 bg-red-500/5 rounded-r-lg">
-                                                        <h4 className="text-red-400 font-bold uppercase tracking-wider text-xs mb-2">The Manual Pain (Old Way)</h4>
+                                                        <h4 className="text-red-400 font-bold uppercase tracking-wider text-xs mb-2">Before</h4>
                                                         <p className="text-[--text-muted] leading-relaxed text-sm md:text-base">{project.manual_problem}</p>
                                                     </div>
 
                                                     <div className="relative pl-6 py-3 pr-4 border-l-2 border-[--neon-green] bg-[--neon-green]/5 rounded-r-lg">
-                                                        <h4 className="text-[--neon-green] font-bold uppercase tracking-wider text-xs mb-2">The AI Solution (New Way)</h4>
+                                                        <h4 className="text-[--neon-green] font-bold uppercase tracking-wider text-xs mb-2">After</h4>
                                                         <p className="text-gray-200 leading-relaxed text-sm md:text-base">{project.auto_solution}</p>
                                                     </div>
 
                                                     {/* Outcome Box */}
                                                     <div className="bg-[#111] p-5 rounded-xl border border-[#222] mt-6">
                                                         <h4 className="text-white font-bold mb-2 flex items-center gap-2 text-sm uppercase tracking-wider">
-                                                            <Zap size={14} className="text-[--neon-cyan]" /> Measured Impact
+                                                            <Zap size={14} className="text-[--neon-cyan]" /> Result
                                                         </h4>
                                                         <p className="text-[--neon-cyan] text-lg font-medium">{project.outcome}</p>
                                                     </div>
@@ -298,10 +340,6 @@ const SystemsShowcase = () => {
                                                     className="flex-grow flex items-center justify-center p-8 bg-[url('/grid-pattern.svg')] bg-repeat opacity-100 cursor-zoom-in relative overflow-hidden"
                                                     onClick={() => setIsZoomed(true)}
                                                 >
-                                                    {/* Zoom Hint */}
-                                                    <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-xs font-mono backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
-                                                        <ExternalLink size={12} /> Click to Zoom
-                                                    </div>
 
                                                     <AnimatePresence mode='wait'>
                                                         <motion.img

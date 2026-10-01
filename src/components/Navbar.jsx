@@ -5,29 +5,40 @@ import { Menu, X, ArrowUpRight } from 'lucide-react';
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [hidden, setHidden] = useState(false);
 
     useEffect(() => {
+        let lastY = window.scrollY;
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            const y = window.scrollY;
+            setScrolled(y > 50);
+            // Hide while scrolling down, reveal on any scroll up; always shown near the top.
+            if (y < 120) setHidden(false);
+            else if (Math.abs(y - lastY) > 6) setHidden(y > lastY);
+            lastY = y;
         };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    const isHidden = hidden && !mobileMenuOpen;
+
     const navLinks = [
-        { name: 'DEMO', href: '#demo' },
         { name: 'WORK', href: '#work' },
+        { name: 'ABOUT', href: '#architect' },
         { name: 'PROCESS', href: '#process' },
-        { name: 'ARCHITECT', href: '#architect' },
+        { name: 'TRY IT LIVE', href: '#demo' },
     ];
 
     return (
         <>
             <motion.nav
-                initial={{ y: -100, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className={`fixed top-6 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 w-[90%] md:w-auto ${scrolled ? 'py-2' : 'py-4'
+                initial={false}
+                animate={{ y: isHidden ? -110 : 0, opacity: isHidden ? 0 : 1 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                style={{ pointerEvents: isHidden ? 'none' : 'auto' }}
+                onFocusCapture={() => setHidden(false)}
+                className={`fixed top-6 inset-x-0 mx-auto z-50 transition-[padding] duration-500 w-[90%] md:w-fit ${scrolled ? 'py-2' : 'py-4'
                     }`}
             >
                 {/* Glass Pill Container */}
@@ -41,18 +52,18 @@ const Navbar = () => {
                     {/* Logo */}
                     <a href="#" className="flex items-center gap-2 group">
                         <div className="w-2 h-2 rounded-full bg-[--neon-cyan] group-hover:shadow-[0_0_10px_#00F0FF] transition-all" />
-                        <span className="text-xs font-mono font-bold tracking-widest text-white group-hover:text-[--neon-cyan] transition-colors">
-                            META_PORTFOLIO
+                        <span className="whitespace-nowrap text-xs font-mono font-bold tracking-widest text-white group-hover:text-[--neon-cyan] transition-colors">
+                            SARANG KUMBHAR
                         </span>
                     </a>
 
                     {/* Desktop Links */}
-                    <div className="hidden md:flex items-center gap-8">
+                    <div className="hidden md:flex items-center gap-6">
                         {navLinks.map((link) => (
                             <a
                                 key={link.name}
                                 href={link.href}
-                                className="text-[10px] font-mono font-medium text-[--text-muted] hover:text-white transition-colors tracking-wider"
+                                className="whitespace-nowrap py-2 text-xs font-mono font-medium text-[--text-muted] hover:text-white transition-colors tracking-wider"
                             >
                                 {link.name}
                             </a>
@@ -64,7 +75,7 @@ const Navbar = () => {
                         href="#contact"
                         className="hidden md:flex items-center gap-2 px-4 py-1.5 bg-white/5 hover:bg-[--neon-cyan] border border-white/10 hover:border-[--neon-cyan] rounded-full transition-all group"
                     >
-                        <span className="text-[10px] font-bold text-white group-hover:text-black tracking-wide">LET'S TALK</span>
+                        <span className="whitespace-nowrap text-[10px] font-bold text-white group-hover:text-black tracking-wide">LET'S TALK</span>
                         <ArrowUpRight size={12} className="text-[--text-muted] group-hover:text-black transition-colors" />
                     </a>
 
@@ -111,7 +122,7 @@ const Navbar = () => {
                                     onClick={() => setMobileMenuOpen(false)}
                                     className="mt-4 w-full py-4 bg-[--neon-cyan] text-black font-bold text-center rounded-lg hover:shadow-[0_0_20px_rgba(0,240,255,0.3)] transition-all flex items-center justify-center gap-2"
                                 >
-                                    INITIALIZE_CHAT <ArrowUpRight size={16} />
+                                    LET'S TALK <ArrowUpRight size={16} />
                                 </a>
                             </div>
                         </div>
