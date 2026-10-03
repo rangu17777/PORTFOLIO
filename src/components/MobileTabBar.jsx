@@ -10,19 +10,22 @@ const tabs = [
     { id: 'contact', label: 'Talk', href: '#contact', icon: MessageCircle },
 ];
 
+// Sections without their own tab light up the nearest related tab.
+const sectionToTab = { process: 'architect' };
+
 // App-style bottom navigation, rendered on mobile only.
 const MobileTabBar = () => {
     const [active, setActive] = useState('top');
 
     useEffect(() => {
-        const sections = tabs
-            .map((t) => document.getElementById(t.id))
+        const sections = [...tabs.map((t) => t.id), ...Object.keys(sectionToTab)]
+            .map((id) => document.getElementById(id))
             .filter(Boolean);
 
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
-                    if (entry.isIntersecting) setActive(entry.target.id);
+                    if (entry.isIntersecting) setActive(sectionToTab[entry.target.id] ?? entry.target.id);
                 });
             },
             { rootMargin: '-45% 0px -50% 0px' }
