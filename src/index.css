@@ -245,3 +245,15 @@
     20% { opacity: 1; transform: scale(1.15); color: #fff; text-shadow: 0 0 12px #00f0ff; }
     40% { opacity: 0.6; transform: translateY(0); }
 }
+
+/* Low-end devices: rotate a pre-drawn glow instead of animating box-shadow every frame */
+.intro-orb--lite .intro-orb__ring {
+    animation: intro-orb-rotate 2s linear infinite;
+    box-shadow: 0 10px 20px 0 #fff inset, 0 20px 30px 0 #00f0ff inset, 0 60px 60px 0 #3b82f6 inset;
+    will-change: transform;
+}
+
+@keyframes intro-orb-rotate {
+    from { transform: rotate(90deg); }
+    to { transform: rotate(450deg); }
+}
