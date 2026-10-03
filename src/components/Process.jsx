@@ -88,7 +88,7 @@ const Process = () => {
             {/* Background Grid */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(6,182,212,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(6,182,212,0.05)_1px,transparent_1px)] bg-[size:100px_100px] opacity-20 pointer-events-none" />
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto md:px-6 relative z-10">
                 <div className="mb-12 md:mb-24 text-center">
                     <motion.div
                         initial={{ opacity: 0 }}

@@ -61,8 +61,8 @@ const SystemsShowcase = () => {
     };
 
     return (
-        <section id="work" className="py-24 relative">
-            <div className="mb-16">
+        <section id="work" className="py-10 md:py-24 relative">
+            <div className="mb-8 md:mb-16">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
