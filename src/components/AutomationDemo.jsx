@@ -33,7 +33,7 @@ const AutomationDemo = () => {
     };
 
     return (
-        <section id="demo" className="py-24 relative border-t border-[rgba(255,255,255,0.05)]">
+        <section id="demo" className="py-12 md:py-24 relative border-t border-[rgba(255,255,255,0.05)]">
             <div className="grid md:grid-cols-2 gap-16 items-center">
 
                 {/* Left: Context */}
@@ -64,7 +64,7 @@ const AutomationDemo = () => {
                     {/* Neon Border */}
                     <div className="absolute -inset-1 bg-gradient-to-r from-[--neon-cyan] to-[--neon-purple] rounded-xl blur opacity-20" />
 
-                    <div className="relative bg-[#050505] border border-[#333] rounded-xl p-8 font-mono">
+                    <div className="relative bg-[#050505] border border-[#333] rounded-xl p-5 md:p-8 font-mono">
                         {/* Header */}
                         <div className="flex gap-2 mb-6 border-b border-[#333] pb-4">
                             <div className="w-3 h-3 rounded-full bg-red-500" />

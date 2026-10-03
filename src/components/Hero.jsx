@@ -87,7 +87,7 @@ const MobileShowcase = ({ active, setActive }) => (
                     key={site.image}
                     onClick={() => setActive(i)}
                     aria-label={`Show ${site.name}`}
-                    className="p-1.5"
+                    className="p-3"
                 >
                     <span className={`block h-1.5 rounded-full transition-all duration-500 ${i === active ? 'w-6 bg-[--neon-cyan]' : 'w-1.5 bg-white/40'}`} />
                 </button>

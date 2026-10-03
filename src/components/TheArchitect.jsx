@@ -7,12 +7,12 @@ const TheArchitect = () => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <section id="architect" className="py-24 relative overflow-hidden">
+        <section id="architect" className="py-12 md:py-24 relative overflow-hidden">
 
             {/* Background Grid - subtle hint of the matrix */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
 
-            <div className="container mx-auto px-6 relative z-10">
+            <div className="container mx-auto md:px-6 relative z-10">
                 <div className="grid lg:grid-cols-2 gap-16 items-start">
 
                     {/* Left: The "Mission" (Philosophy) */}
@@ -80,7 +80,7 @@ const TheArchitect = () => {
                                 </div>
                             </div>
 
-                            <div className="p-8 grid gap-8">
+                            <div className="p-5 md:p-8 grid gap-6 md:gap-8">
 
                                 {/* Photo & Basic ID Info */}
                                 <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start text-center sm:text-left">

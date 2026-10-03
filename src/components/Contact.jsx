@@ -26,17 +26,17 @@ const Contact = () => {
     };
 
     return (
-        <section id="contact" className="py-32 flex justify-center px-4">
+        <section id="contact" className="py-12 md:py-32 flex justify-center md:px-4">
             <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 className="w-full max-w-5xl"
             >
-                <SpotlightCard className="p-10 md:p-16 relative overflow-hidden group" spotlightColor="rgba(0, 240, 255, 0.15)">
+                <SpotlightCard className="p-6 md:p-16 relative overflow-hidden group" spotlightColor="rgba(0, 240, 255, 0.15)">
                     {/* Background Grid Accent */}
                     <div className="absolute top-0 right-0 w-full h-full opacity-20 pointer-events-none bg-[url('/grid-pattern.svg')] opacity-[0.03]" />
 
-                    <div className="relative z-10 flex flex-col md:flex-row gap-12 items-center justify-between">
+                    <div className="relative z-10 flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-between">
                         {/* Text Area */}
                         <div className="text-center md:text-left max-w-xl">
                             <div className="inline-flex items-center gap-2 text-[--neon-cyan] font-mono text-xs tracking-[0.2em] mb-6 uppercase">
@@ -56,13 +56,13 @@ const Contact = () => {
                         </div>
 
                         {/* Action Dock */}
-                        <div className="flex flex-col gap-4 w-full md:w-auto min-w-[300px]">
+                        <div className="flex flex-col gap-4 w-full md:w-auto md:min-w-[300px]">
                             {/* WhatsApp Button - Primary */}
                             <a
                                 href="https://wa.me/918793198054?text=Hi%20Sarang,%20I%20have%20a%20project%20in%20mind."
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group/btn relative flex items-center justify-between px-8 py-5 bg-[--neon-cyan] text-black rounded-xl font-bold text-lg hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] transition-all duration-300 transform hover:-translate-y-1"
+                                className="group/btn relative flex items-center justify-between px-5 md:px-8 py-4 md:py-5 bg-[--neon-cyan] text-black rounded-xl font-bold text-lg hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] transition-all duration-300 transform hover:-translate-y-1"
                             >
                                 <span className="flex items-center gap-3">
                                     <MessageCircle className="w-6 h-6" />
@@ -75,7 +75,7 @@ const Contact = () => {
                             <a
                                 href="#"
                                 onClick={handleEmailClick}
-                                className="group/btn flex items-center justify-between px-8 py-5 bg-white/5 border border-white/10 text-white rounded-xl font-bold text-lg hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer"
+                                className="group/btn flex items-center justify-between px-5 md:px-8 py-4 md:py-5 bg-white/5 border border-white/10 text-white rounded-xl font-bold text-lg hover:bg-white/10 hover:border-white/30 transition-all duration-300 cursor-pointer"
                             >
                                 <span className="flex items-center gap-3">
                                     <Mail className="w-6 h-6" />

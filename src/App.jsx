@@ -79,7 +79,7 @@ function App() {
             <Navbar />
 
             {/* Main Content: Stabilized (No Skew/Scale) */}
-            <main className="container mx-auto px-6 pt-28 pb-20 space-y-20 md:space-y-32">
+            <main className="container mx-auto px-6 pt-28 pb-20 space-y-4 md:space-y-32">
                 <Hero />
                 <SystemsShowcase />
                 <TheArchitect />
