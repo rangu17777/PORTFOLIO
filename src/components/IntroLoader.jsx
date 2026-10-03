@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { isLowEnd } from '../utils/deviceTier';
 
 // Intro: a neon orb with a glow rotating around its inner edge, the name lighting up letter by letter,
 // then the screen splits open. Effect modelled on the "AI Loader" on 21st.dev, rebuilt by hand.
@@ -79,7 +80,7 @@ const IntroLoader = ({ onComplete }) => {
                 animate={{ opacity: exiting ? 0 : 1, scale: exiting && !reduceMotion ? 1.08 : 1 }}
                 transition={{ duration: exiting ? 0.3 : 0.5, ease }}
             >
-                <div className={`intro-orb ${reduceMotion ? 'intro-orb--still' : ''}`}>
+                <div className={`intro-orb ${reduceMotion ? 'intro-orb--still' : ''} ${isLowEnd ? 'intro-orb--lite' : ''}`}>
                     <span className="intro-orb__ring" />
                     <span className="intro-orb__name">
                         {NAME.split('').map((ch, i) => (

@@ -28,6 +28,12 @@ const TypedLine = ({ reduceMotion }) => {
     const [count, setCount] = useState(reduceMotion ? typedLines[0].length : 0);
 
     useEffect(() => {
+        const preload = () => sites.slice(1).forEach((site) => { new Image().src = site.image; });
+        const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1500));
+        idle(preload);
+    }, []);
+
+    useEffect(() => {
         if (reduceMotion) return;
         const line = typedLines[lineIdx];
         const done = count >= line.length;
@@ -101,6 +107,12 @@ const Hero = () => {
     const reduceMotion = useReducedMotion();
     const [active, setActive] = useState(0);
     const isMobile = useIsMobile();
+
+    useEffect(() => {
+        const preload = () => sites.slice(1).forEach((site) => { new Image().src = site.image; });
+        const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1500));
+        idle(preload);
+    }, []);
 
     useEffect(() => {
         if (reduceMotion) return;
@@ -207,6 +219,8 @@ const Hero = () => {
                         transition={{ duration: 0.8, ease }}
                         className="absolute inset-0 h-full w-full object-cover object-top"
                         draggable="false"
+                        decoding="async"
+                        fetchpriority={active === 0 ? 'high' : 'auto'}
                     />
                 </AnimatePresence>
 

@@ -5,13 +5,14 @@ const Background = () => {
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { alpha: false });
         let width, height;
         let particles = [];
 
         // Configuration
         const isMobile = window.innerWidth < 768;
         const particleCount = isMobile ? 150 : 400; // Optimized for 60 FPS+
+        let rafId = 0;
         const particleSpeed = 2;
         const trailOpacity = 0.08; // Lower = longer trails
         const colorBase = 'hsl(180, 100%, 50%)'; // Cyan/Teal base
@@ -78,17 +79,33 @@ const Background = () => {
                 p.draw();
             });
 
-            requestAnimationFrame(animate);
+            rafId = requestAnimationFrame(animate);
         };
 
         // Initialize
-        resize();
-        window.addEventListener('resize', resize);
-        const animationId = requestAnimationFrame(animate);
+        // Only rebuild on real width changes (mobile URL bar show/hide fires resize too).
+        let lastWidth = 0;
+        const onResize = () => {
+            if (window.innerWidth === lastWidth) return;
+            lastWidth = window.innerWidth;
+            resize();
+        };
+
+        // Stop drawing while the tab is hidden.
+        const onVisibility = () => {
+            cancelAnimationFrame(rafId);
+            if (!document.hidden) rafId = requestAnimationFrame(animate);
+        };
+
+        onResize();
+        window.addEventListener('resize', onResize);
+        document.addEventListener('visibilitychange', onVisibility);
+        rafId = requestAnimationFrame(animate);
 
         return () => {
-            window.removeEventListener('resize', resize);
-            cancelAnimationFrame(animationId);
+            window.removeEventListener('resize', onResize);
+            document.removeEventListener('visibilitychange', onVisibility);
+            cancelAnimationFrame(rafId);
         };
     }, []);
 

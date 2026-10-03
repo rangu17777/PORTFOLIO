@@ -13,14 +13,21 @@ import Footer from './components/Footer';
 import IntroLoader, { shouldPlayIntro } from './components/IntroLoader';
 import MobileTabBar from './components/MobileTabBar';
 import useIsMobile from './hooks/useIsMobile';
+import { isLowEnd, prefersReducedMotion } from './utils/deviceTier';
 import Lenis from '@studio-freight/lenis';
 
 function App() {
     const lenisRef = useRef(null);
     const isMobile = useIsMobile();
     const [introDone, setIntroDone] = useState(() => !shouldPlayIntro());
+    // Phones and low-end devices get the light version of the background effects.
+    const lite = isMobile || isLowEnd;
 
     useEffect(() => {
+        // Native scrolling on touch screens and for reduced motion: smoother and cheaper there.
+        const touch = window.matchMedia('(pointer: coarse)').matches;
+        if (touch || prefersReducedMotion) return;
+
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -63,8 +70,8 @@ function App() {
 
     return (
         <div className="bg-core min-h-screen text-main font-sans selection:bg-neon-cyan selection:text-black relative overflow-x-hidden">
-            {/* Mobile gets a lightweight static backdrop; desktop keeps the full effects */}
-            {isMobile ? (
+            {/* Phones and low-end devices get a static backdrop; capable desktops keep the full effects */}
+            {lite ? (
                 <div className="fixed inset-0 z-[-1] bg-[#030014] bg-[radial-gradient(ellipse_at_top,rgba(0,240,255,0.12),transparent_60%),radial-gradient(ellipse_at_bottom,rgba(188,19,254,0.10),transparent_60%)]" />
             ) : (
                 <>
@@ -93,7 +100,7 @@ function App() {
             {isMobile && introDone && <MobileTabBar />}
 
             {/* Global Color Pulse Overlay */}
-            {!isMobile && <div className="fixed inset-0 pointer-events-none z-[50] mix-blend-overlay opacity-20 animate-pulse-slow bg-gradient-to-t from-transparent via-[--neon-purple] to-transparent" />}
+            {!lite && <div className="fixed inset-0 pointer-events-none z-[50] mix-blend-overlay opacity-20 animate-pulse-slow bg-gradient-to-t from-transparent via-[--neon-purple] to-transparent" />}
 
             <style>{`
                 @keyframes pulse-slow {
@@ -101,6 +108,7 @@ function App() {
                     50% { opacity: 0.3; }
                 }
                 .animate-pulse-slow {
+                    will-change: opacity;
                     animation: pulse-slow 8s ease-in-out infinite;
                 }
             `}</style>
