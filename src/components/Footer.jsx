@@ -8,7 +8,7 @@ const links = [
 
 const Footer = () => {
     return (
-        <footer className="py-10 border-t border-[rgba(255,255,255,0.05)] text-sm text-[--text-muted]">
+        <footer className="pt-10 pb-28 md:pb-10 border-t border-[rgba(255,255,255,0.05)] text-sm text-[--text-muted]">
             <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
                 <div>
                     <div className="text-white font-medium">
