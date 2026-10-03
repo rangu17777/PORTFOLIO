@@ -14,6 +14,8 @@ const TYPE_MS = 500;
 const LINE_AT = SCRAMBLE_MS + TYPE_MS;
 const EXIT_AT = LINE_AT + 350;
 const STEP_MS = 30;
+// Phones get a quicker intro (~1s instead of ~1.75s).
+const MOBILE_SPEEDUP = 1.75;
 
 const ease = [0.22, 1, 0.36, 1];
 
@@ -68,10 +70,11 @@ const IntroLoader = ({ onComplete }) => {
             let start = 0;
             let last = 0;
             let lineShown = false;
+            const speedup = window.matchMedia('(max-width: 767px)').matches ? MOBILE_SPEEDUP : 1;
 
             const tick = (now) => {
                 if (cancelled || finishedRef.current) return;
-                const t = now - start;
+                const t = (now - start) * speedup;
 
                 if (now - last >= STEP_MS) {
                     last = now;
