@@ -11,10 +11,13 @@ import Process from './components/Process';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import IntroLoader, { shouldPlayIntro } from './components/IntroLoader';
+import MobileTabBar from './components/MobileTabBar';
+import useIsMobile from './hooks/useIsMobile';
 import Lenis from '@studio-freight/lenis';
 
 function App() {
     const lenisRef = useRef(null);
+    const isMobile = useIsMobile();
     const [introDone, setIntroDone] = useState(() => !shouldPlayIntro());
 
     useEffect(() => {
@@ -60,16 +63,23 @@ function App() {
 
     return (
         <div className="bg-core min-h-screen text-main font-sans selection:bg-neon-cyan selection:text-black relative overflow-x-hidden">
-            <Cursor />
-            <Background />
-            <NeuralLinks />
+            {/* Mobile gets a lightweight static backdrop; desktop keeps the full effects */}
+            {isMobile ? (
+                <div className="fixed inset-0 z-[-1] bg-[#030014] bg-[radial-gradient(ellipse_at_top,rgba(0,240,255,0.12),transparent_60%),radial-gradient(ellipse_at_bottom,rgba(188,19,254,0.10),transparent_60%)]" />
+            ) : (
+                <>
+                    <Cursor />
+                    <Background />
+                    <NeuralLinks />
+                </>
+            )}
 
             {!introDone && <IntroLoader onComplete={() => setIntroDone(true)} />}
 
             <Navbar />
 
             {/* Main Content: Stabilized (No Skew/Scale) */}
-            <main className="container mx-auto px-6 pt-28 pb-20 space-y-32">
+            <main className="container mx-auto px-6 pt-28 pb-20 space-y-20 md:space-y-32">
                 <Hero />
                 <SystemsShowcase />
                 <TheArchitect />
@@ -80,8 +90,10 @@ function App() {
 
             <Footer />
 
+            {isMobile && introDone && <MobileTabBar />}
+
             {/* Global Color Pulse Overlay */}
-            <div className="fixed inset-0 pointer-events-none z-[50] mix-blend-overlay opacity-20 animate-pulse-slow bg-gradient-to-t from-transparent via-[--neon-purple] to-transparent" />
+            {!isMobile && <div className="fixed inset-0 pointer-events-none z-[50] mix-blend-overlay opacity-20 animate-pulse-slow bg-gradient-to-t from-transparent via-[--neon-purple] to-transparent" />}
 
             <style>{`
                 @keyframes pulse-slow {

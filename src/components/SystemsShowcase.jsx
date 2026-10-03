@@ -90,7 +90,7 @@ const SystemsShowcase = () => {
             </div>
 
             {tab === 'websites' && (
-                <div className="grid sm:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <div className="flex sm:grid sm:grid-cols-2 gap-4 sm:gap-8 max-w-6xl mx-auto overflow-x-auto sm:overflow-visible snap-x snap-mandatory -mx-6 px-6 sm:mx-auto sm:px-0 pb-2 sm:pb-0 [scrollbar-width:none]">
                     {websites.map((site, i) => {
                         const Wrapper = site.url ? 'a' : 'div';
                         return (
@@ -100,6 +100,7 @@ const SystemsShowcase = () => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: (i % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                                className="shrink-0 w-[85%] sm:w-auto snap-center"
                             >
                                 <Wrapper
                                     {...(site.url ? { href: site.url, target: '_blank', rel: 'noopener noreferrer' } : {})}
